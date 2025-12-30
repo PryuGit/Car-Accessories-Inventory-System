@@ -1,8 +1,10 @@
 class StockItem:
-    def __init__(self,stock_code,stock_quantity,stock_price):
+    def __init__(self,stock_code,stock_quantity,stock_price,stock_name,stock_desc):
         self.__stock_code=stock_code
         self.__stock_quantity=stock_quantity
         self.__stock_price=stock_price
+        self.__stock_name=stock_name
+        self.__stock_desc=stock_desc
         
     def getStockCode(self):
         return self.__stock_code
@@ -27,3 +29,6 @@ class StockItem:
     
     def getStockDescription(self):
         return self.__stock_desc
+                
+
+    
