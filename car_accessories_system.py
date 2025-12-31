@@ -81,22 +81,39 @@ class NavSys(StockItem):
         return "TomTom"
     
     def __str__(self):
-        
         return super().__str__()+f"Brand:{self.getBrand()}\n"
+
+print("\nCar Parts and Accessories Management System\n")    
+code=input("Enter Stock Code:")  
+unit=int(input("Enter Total Unit:"))
+price=float(input("Enter Price per Unit:"))
+brand=input("Enter Brand:")
       
-sys=NavSys("W1S1",2,200.9,"TomTom")
+sys=NavSys(code,unit,price,brand)
 
 print(f"\nCreating a stock with {sys.getStockQuantity()} units {sys.getStockName()}, price {sys.getStockPrice()} each, and item code {sys.getStockCode()}")
 print(sys)
 
-print(f"Increasing 10 more units")
-sys.increaseStock(10)
-print(sys)
+print("Edit:")
+print("1)Increase unit")
+print("2)Decrease unit")
+print("3)Set new price per unit")
+choice=int(input("Select Option:"))
+match(choice):
+    case 1:
+        print(f"Increasing 10 more units")
+        sys.increaseStock(10)
+        print(sys)
 
-print(f"Sold 10 units")
-sys.sellStock(10)
-print(sys)
+    case 2:
+        print(f"Sold 10 units")
+        sys.sellStock(10)
+        print(sys)
 
-sys.setStockPrice(100.9)
-print(f"Set new price 100.9 per unit")
-print(sys)
+    case 3:
+        sys.setStockPrice(100.9)
+        print(f"Set new price 100.9 per unit")
+        print(sys)
+        
+    case _:
+        print("Invalid")
