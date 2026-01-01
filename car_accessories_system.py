@@ -19,11 +19,8 @@ class StockItem:
         self.__stock_code=stock_code
         
     def setStockQuantity(self,stock_quantity):
-        if self.__stock_quantity<100:
-            self.__stock_quantity=stock_quantity
-        else:
-            print("Error, The value must be less than 100!!")
-    
+        self.__stock_quantity=stock_quantity
+        
     def setStockPrice(self,stock_price):
         self.__stock_price=stock_price
     
@@ -40,19 +37,25 @@ class StockItem:
         return self.getStockPrice()+(self.getStockPrice()*(self.getVAT()/100))   
        
     def increaseStock(self,amount):
-        if amount>1:
-            self.setStockQuantity(self.getStockQuantity()+amount)
+        if amount<1:
+            print("Error, The unit quantity must be at least 1")
+            return False
+        elif amount+self.getStockQuantity()>100:
+            print("Error, The unit quantity must not exceed more than 100")
+            return False
         else:
-           print("Error, The value must be at least 1")
+            self.setStockQuantity(self.getStockQuantity()+amount)
+            return True
     
     def sellStock(self,amount):
         if amount<1:
-            print("Error, The value must be at least 1")
+            print("Error, The unit quantity must be at least 1")
             return False
         elif amount<=self.getStockQuantity():
             self.setStockQuantity(self.getStockQuantity()-amount)
             return True
         else:
+            print("Error, Insufficient unit quantity")
             return False
            
     def __str__(self):
@@ -95,24 +98,27 @@ print(f"\nCreating a stock with {sys.getStockQuantity()} units {sys.getStockName
 print(sys)
 
 print("Edit:")
-print("1)Increase unit")
-print("2)Decrease unit")
-print("3)Set new price per unit")
+print("1)Quantity Increment")
+print("2)Quantity Decrement")
+print("3)Set New Price Per Unit")
 choice=int(input("Select Option:"))
 match(choice):
     case 1:
-        print(f"Increasing 10 more units")
-        sys.increaseStock(10)
-        print(sys)
+        add=int(input("\nEnter additional units:"))
+        print(f"\nIncreasing {add} more units")
+        if sys.increaseStock(add)==True:
+            print(sys)
 
     case 2:
-        print(f"Sold 10 units")
-        sys.sellStock(10)
-        print(sys)
+        sell=int(input("\nEnter sold units:"))
+        print(f"\nSold {sell} units")
+        if sys.sellStock(sell)==True:
+            print(sys)
 
     case 3:
-        sys.setStockPrice(100.9)
-        print(f"Set new price 100.9 per unit")
+        new_price=float(input("\nSet new price per unit:"))
+        sys.setStockPrice(new_price)
+        print(f"\nSet new price {new_price:.2f} per unit")
         print(sys)
         
     case _:
