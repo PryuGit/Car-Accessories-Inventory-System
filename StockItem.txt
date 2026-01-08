@@ -1,0 +1,8 @@
+Stock Code: w1s1
+Stock Category: Car accessories
+Brand: TomTom
+Name:Navigation System
+Description: GeoVision Sat Nav
+Quantity: 32
+Price per Unit: 210.20
+Price with VAT (per unit): 246.98
